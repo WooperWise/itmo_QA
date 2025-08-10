@@ -1,27 +1,41 @@
 import os
 
 # Bot Configuration - Load from environment variables
-OLLAMA_EMBEDDING_MODEL = os.getenv('OLLAMA_EMBEDDING_MODEL', "dengcao/Qwen3-Embedding-0.6B:Q8_0")
-OLLAMA_RERANKER_MODEL = os.getenv('OLLAMA_RERANKER_MODEL', "dengcao/Qwen3-Reranker-4B:Q4_K_M")
-OLLAMA_GENERATION_MODEL = os.getenv('OLLAMA_GENERATION_MODEL', "qwen3:4b")
-QDRANT_COLLECTION_NAME = os.getenv('QDRANT_COLLECTION_NAME', "markdown_pages")
+OLLAMA_EMBEDDING_MODEL = os.getenv(
+    "OLLAMA_EMBEDDING_MODEL", "dengcao/Qwen3-Embedding-0.6B:Q8_0"
+)
+OLLAMA_RERANKER_MODEL = os.getenv(
+    "OLLAMA_RERANKER_MODEL", "dengcao/Qwen3-Reranker-4B:Q4_K_M"
+)
+OLLAMA_GENERATION_MODEL = os.getenv("OLLAMA_GENERATION_MODEL", "qwen3:4b")
+QDRANT_COLLECTION_NAME = os.getenv("QDRANT_COLLECTION_NAME", "markdown_pages")
 
 # RAG Configuration
 VECTOR_SEARCH_LIMIT = 50  # Number of initial results from vector search
-RERANKER_LIMIT = 10       # Number of results after reranking
-MAX_MESSAGE_LENGTH = 4000 # Maximum Telegram message length
+RERANKER_LIMIT = 10  # Number of results after reranking
+MAX_MESSAGE_LENGTH = 4000  # Maximum Telegram message length
 
 # New RAG Pipeline Configuration
-TOP_EMBEDDER_RESULTS = int(os.getenv('TOP_EMBEDDER_RESULTS', "5"))  # Top results from embedder to guarantee in context
-TOP_RERANKER_RESULTS = int(os.getenv('TOP_RERANKER_RESULTS', "5"))  # Top results from reranker to include
-MAX_CONTEXT_CHARS = int(os.getenv('MAX_CONTEXT_CHARS', "20000"))    # Maximum context characters for LLM
+TOP_EMBEDDER_RESULTS = int(
+    os.getenv("TOP_EMBEDDER_RESULTS", "5")
+)  # Top results from embedder to guarantee in context
+TOP_RERANKER_RESULTS = int(
+    os.getenv("TOP_RERANKER_RESULTS", "5")
+)  # Top results from reranker to include
+MAX_CONTEXT_CHARS = int(
+    os.getenv("MAX_CONTEXT_CHARS", "20000")
+)  # Maximum context characters for LLM
 
 # Two-Phase Context Assembly Configuration
-TOP_CHUNKS_FOR_CONTEXT = int(os.getenv('TOP_CHUNKS_FOR_CONTEXT', "5"))  # Top chunks from vector search (Block 1)
-TOP_COMPLETE_PAGES = int(os.getenv('TOP_COMPLETE_PAGES', "5"))           # Top complete pages after reranking (Block 2)
+TOP_CHUNKS_FOR_CONTEXT = int(
+    os.getenv("TOP_CHUNKS_FOR_CONTEXT", "5")
+)  # Top chunks from vector search (Block 1)
+TOP_COMPLETE_PAGES = int(
+    os.getenv("TOP_COMPLETE_PAGES", "5")
+)  # Top complete pages after reranking (Block 2)
 
 # Logging Configuration
-LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 # Bot Messages - English
 START_MESSAGE_EN = """🎯 **ITMO AI Programs Specialist Consultant**
@@ -88,9 +102,13 @@ Please ask about these programs' curricula, requirements, career paths, or help 
 
 PROCESSING_MESSAGE_EN = "🔍 Analyzing your request and preparing recommendations..."
 
-QDRANT_ERROR_MESSAGE_EN = "❌ Database is temporarily unavailable. Please try again later."
+QDRANT_ERROR_MESSAGE_EN = (
+    "❌ Database is temporarily unavailable. Please try again later."
+)
 
-OLLAMA_ERROR_MESSAGE_EN = "❌ AI services are temporarily unavailable. Please try again later."
+OLLAMA_ERROR_MESSAGE_EN = (
+    "❌ AI services are temporarily unavailable. Please try again later."
+)
 
 # Bot Messages - Russian
 START_MESSAGE_RU = """🎯 **Специализированный консультант по программам ИИ ИТМО**
@@ -206,48 +224,48 @@ AI_PROGRAM_FOCUS_MESSAGE_RU = """**🎯 Моя экспертиза сосред
 **Какой аспект ИИ вас больше интересует - техническая разработка или бизнес-управление?**"""
 
 # Environment Variables
-QDRANT_HOST = os.getenv('QDRANT_HOST', "qdrant")
-QDRANT_PORT = int(os.getenv('QDRANT_PORT', "6333"))
-OLLAMA_HOST = os.getenv('OLLAMA_HOST', "host.orb.internal")
-OLLAMA_PORT = int(os.getenv('OLLAMA_PORT', "11434"))
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+QDRANT_HOST = os.getenv("QDRANT_HOST", "qdrant")
+QDRANT_PORT = int(os.getenv("QDRANT_PORT", "6333"))
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "host.orb.internal")
+OLLAMA_PORT = int(os.getenv("OLLAMA_PORT", "11434"))
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # Message Templates by Language
 MESSAGES = {
-    'en': {
-        'start': START_MESSAGE_EN,
-        'help': HELP_MESSAGE_EN,
-        'error': ERROR_MESSAGE_EN,
-        'no_content': NO_RELEVANT_CONTENT_MESSAGE_EN,
-        'processing': PROCESSING_MESSAGE_EN,
-        'qdrant_error': QDRANT_ERROR_MESSAGE_EN,
-        'ollama_error': OLLAMA_ERROR_MESSAGE_EN,
-        'off_topic_redirect': OFF_TOPIC_REDIRECT_MESSAGE_EN,
-        'ai_program_focus': AI_PROGRAM_FOCUS_MESSAGE_EN,
+    "en": {
+        "start": START_MESSAGE_EN,
+        "help": HELP_MESSAGE_EN,
+        "error": ERROR_MESSAGE_EN,
+        "no_content": NO_RELEVANT_CONTENT_MESSAGE_EN,
+        "processing": PROCESSING_MESSAGE_EN,
+        "qdrant_error": QDRANT_ERROR_MESSAGE_EN,
+        "ollama_error": OLLAMA_ERROR_MESSAGE_EN,
+        "off_topic_redirect": OFF_TOPIC_REDIRECT_MESSAGE_EN,
+        "ai_program_focus": AI_PROGRAM_FOCUS_MESSAGE_EN,
     },
-    'ru': {
-        'start': START_MESSAGE_RU,
-        'help': HELP_MESSAGE_RU,
-        'error': ERROR_MESSAGE_RU,
-        'no_content': NO_RELEVANT_CONTENT_MESSAGE_RU,
-        'processing': PROCESSING_MESSAGE_RU,
-        'qdrant_error': QDRANT_ERROR_MESSAGE_RU,
-        'ollama_error': OLLAMA_ERROR_MESSAGE_RU,
-        'off_topic_redirect': OFF_TOPIC_REDIRECT_MESSAGE_RU,
-        'ai_program_focus': AI_PROGRAM_FOCUS_MESSAGE_RU,
-    }
+    "ru": {
+        "start": START_MESSAGE_RU,
+        "help": HELP_MESSAGE_RU,
+        "error": ERROR_MESSAGE_RU,
+        "no_content": NO_RELEVANT_CONTENT_MESSAGE_RU,
+        "processing": PROCESSING_MESSAGE_RU,
+        "qdrant_error": QDRANT_ERROR_MESSAGE_RU,
+        "ollama_error": OLLAMA_ERROR_MESSAGE_RU,
+        "off_topic_redirect": OFF_TOPIC_REDIRECT_MESSAGE_RU,
+        "ai_program_focus": AI_PROGRAM_FOCUS_MESSAGE_RU,
+    },
 }
 
 
-def get_message(key: str, language: str = 'en') -> str:
+def get_message(key: str, language: str = "en") -> str:
     """
     Get localized message by key and language.
-    
+
     Args:
         key: Message key
         language: Language code ('en' or 'ru')
-        
+
     Returns:
         Localized message text
     """
-    return MESSAGES.get(language, MESSAGES['en']).get(key, MESSAGES['en'][key])
+    return MESSAGES.get(language, MESSAGES["en"]).get(key, MESSAGES["en"][key])

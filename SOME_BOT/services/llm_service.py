@@ -1,25 +1,31 @@
 """
 LLM service using Ollama for generating answers based on retrieved context.
 """
+
 import logging
 import time
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 import ollama
-from constants import OLLAMA_HOST, OLLAMA_PORT, OLLAMA_GENERATION_MODEL
-from utils.logging_utils import log_performance, log_error_with_context, log_generation_metrics
+from constants import OLLAMA_GENERATION_MODEL, OLLAMA_HOST, OLLAMA_PORT
+from utils.logging_utils import (
+    log_error_with_context,
+    log_generation_metrics,
+    log_performance,
+)
 
 logger = logging.getLogger(__name__)
 
 
 class LLMService:
     """Service for generating answers using Ollama LLM."""
-    
+
     def __init__(self):
         """Initialize the LLM service."""
         self.client = None
         self.model = OLLAMA_GENERATION_MODEL
         self._connect()
-    
+
     def _connect(self) -> None:
         """Connect to Ollama service."""
         try:
@@ -29,55 +35,62 @@ class LLMService:
         except Exception as e:
             logger.error(f"Failed to connect to Ollama LLM: {e}")
             self.client = None
-    
+
     def _ensure_connection(self) -> bool:
         """Ensure connection to Ollama service."""
         if self.client is None:
             self._connect()
         return self.client is not None
-    
-    def _create_context_from_documents(self, documents: List[Dict[str, Any]],
-                                     top_embedder_results: int = 5,
-                                     top_reranker_results: int = 5,
-                                     max_context_chars: int = 20000) -> str:
+
+    def _create_context_from_documents(
+        self,
+        documents: List[Dict[str, Any]],
+        top_embedder_results: int = 5,
+        top_reranker_results: int = 5,
+        max_context_chars: int = 20000,
+    ) -> str:
         """
         Create context string from retrieved documents with smart assembly logic.
-        
+
         Args:
             documents: List of retrieved and reranked documents
             top_embedder_results: Number of top embedder results to guarantee in context
             top_reranker_results: Number of top reranker results to include
             max_context_chars: Maximum context characters for LLM
-            
+
         Returns:
             Formatted context string within character limit
         """
         if not documents:
             return ""
-        
+
         # First, add top embedder results (guaranteed inclusion)
         context_parts = []
         current_chars = 0
-        
+
         # Add top embedder results first (but not more than we have)
         embedder_count = min(top_embedder_results, len(documents))
         for i in range(embedder_count):
             doc = documents[i]
-            payload = doc.get('payload', {})
-            content = payload.get('content', '')
-            page_info = payload.get('page_info', f'Document {i+1}')
-            url = payload.get('url', '')
-            
+            payload = doc.get("payload", {})
+            content = payload.get("content", "")
+            page_info = payload.get("page_info", f"Document {i+1}")
+            url = payload.get("url", "")
+
             # Format each document with clear structure
             doc_text = f"=== ИСТОЧНИК {i+1}: {page_info} ===\nURL: {url}\nСОДЕРЖАНИЕ:\n{content}\n=== КОНЕЦ ИСТОЧНИКА {i+1} ==="
-            
+
             # Check if adding this document would exceed the limit
-            doc_chars = len(doc_text) + (3 if context_parts else 0)  # +3 for separator if needed
+            doc_chars = len(doc_text) + (
+                3 if context_parts else 0
+            )  # +3 for separator if needed
             if current_chars + doc_chars > max_context_chars:
                 # Truncate this document to fit within the limit
                 available_chars = max_context_chars - current_chars - 3
                 if available_chars > 100:  # Only add if we have meaningful space
-                    truncated_content = content[:available_chars - 100] + "... [truncated]"
+                    truncated_content = (
+                        content[: available_chars - 100] + "... [truncated]"
+                    )
                     doc_text = f"[Source {i+1}: {page_info}]\n{truncated_content}"
                     if url:
                         doc_text += f"\n[URL: {url}]"
@@ -86,40 +99,44 @@ class LLMService:
             else:
                 context_parts.append(doc_text)
                 current_chars += doc_chars
-        
+
         # Then add top reranker results (avoiding duplicates)
         reranker_added = 0
         for i in range(len(documents)):
             if reranker_added >= top_reranker_results:
                 break
-                
+
             doc = documents[i]
-            payload = doc.get('payload', {})
-            url = payload.get('url', '')
-            
+            payload = doc.get("payload", {})
+            url = payload.get("url", "")
+
             # Check if this document is already included (by URL)
             already_included = False
             for part in context_parts:
                 if url and url in part:
                     already_included = True
                     break
-            
+
             if not already_included:
-                content = payload.get('content', '')
-                page_info = payload.get('page_info', f'Document {i+1}')
-                
+                content = payload.get("content", "")
+                page_info = payload.get("page_info", f"Document {i+1}")
+
                 # Format each document with metadata
                 doc_text = f"[Source {len(context_parts)+1}: {page_info}]\n{content}"
                 if url:
                     doc_text += f"\n[URL: {url}]"
-                
+
                 # Check if adding this document would exceed the limit
-                doc_chars = len(doc_text) + (3 if context_parts else 0)  # +3 for separator if needed
+                doc_chars = len(doc_text) + (
+                    3 if context_parts else 0
+                )  # +3 for separator if needed
                 if current_chars + doc_chars > max_context_chars:
                     # Truncate this document to fit within the limit
                     available_chars = max_context_chars - current_chars - 3
                     if available_chars > 100:  # Only add if we have meaningful space
-                        truncated_content = content[:available_chars - 100] + "... [truncated]"
+                        truncated_content = (
+                            content[: available_chars - 100] + "... [truncated]"
+                        )
                         doc_text = f"=== ИСТОЧНИК {len(context_parts)+1}: {page_info} ===\nURL: {url}\nСОДЕРЖАНИЕ:\n{truncated_content}\n=== КОНЕЦ ИСТОЧНИКА {len(context_parts)+1} ==="
                         context_parts.append(doc_text)
                     break
@@ -127,75 +144,88 @@ class LLMService:
                     context_parts.append(doc_text)
                     current_chars += doc_chars
                     reranker_added += 1
-        
-        logger.info(f"Context assembled: {len(context_parts)} documents, {current_chars} chars (limit: {max_context_chars})")
+
+        logger.info(
+            f"Context assembled: {len(context_parts)} documents, {current_chars} chars (limit: {max_context_chars})"
+        )
         return "\n\n---\n\n".join(context_parts)
-    
-    def _create_three_phase_context(self, educational_programs_data: str,
-                                   conversation_context: List[Dict[str, Any]],
-                                   top_chunks: List[Dict[str, Any]],
-                                   complete_pages: List[Dict[str, Any]],
-                                   max_context_chars: int = 20000) -> str:
+
+    def _create_three_phase_context(
+        self,
+        educational_programs_data: str,
+        conversation_context: List[Dict[str, Any]],
+        top_chunks: List[Dict[str, Any]],
+        complete_pages: List[Dict[str, Any]],
+        max_context_chars: int = 20000,
+    ) -> str:
         """
         Create three-phase context with educational programs, conversation history, and RAG results.
-        
+
         Args:
             educational_programs_data: Educational programs information from cool_diff.md
             conversation_context: Recent conversation exchanges
             top_chunks: Top chunks from vector search
             complete_pages: Complete pages after reranking
             max_context_chars: Maximum context characters for LLM
-            
+
         Returns:
             Formatted three-phase context string
         """
         context_parts = []
         current_chars = 0
-        
+
         # Block 1: Educational Programs (highest priority - always included)
         if educational_programs_data:
             block1_header = "=== БЛОК 1: ОБРАЗОВАТЕЛЬНЫЕ ПРОГРАММЫ ИТМО ==="
             context_parts.append(block1_header)
             current_chars += len(block1_header) + 4
-            
+
             # Reserve 40% of context for educational programs
             edu_limit = int(max_context_chars * 0.4)
             if len(educational_programs_data) > edu_limit:
-                truncated_edu = educational_programs_data[:edu_limit - 100] + "... [truncated]"
+                truncated_edu = (
+                    educational_programs_data[: edu_limit - 100] + "... [truncated]"
+                )
                 context_parts.append(truncated_edu)
                 current_chars += len(truncated_edu) + 4
             else:
                 context_parts.append(educational_programs_data)
                 current_chars += len(educational_programs_data) + 4
-            
-            logger.info(f"Added educational programs block: {len(educational_programs_data)} chars")
-        
+
+            logger.info(
+                f"Added educational programs block: {len(educational_programs_data)} chars"
+            )
+
         # Block 2: Conversation Context (when available)
         if conversation_context:
             block2_header = "=== БЛОК 2: КОНТЕКСТ РАЗГОВОРА ==="
             context_parts.append(block2_header)
             current_chars += len(block2_header) + 4
-            
+
             # Reserve 20% of context for conversation history
             conv_limit = int(max_context_chars * 0.2)
             conv_chars = 0
-            
+
             for i, exchange in enumerate(conversation_context):
-                if 'user' in exchange and 'bot' in exchange:
-                    user_msg = exchange['user']['content']
-                    bot_msg = exchange['bot']['content']
-                    
-                    exchange_text = f"ОБМЕН {i+1}:\nПользователь: {user_msg}\nБот: {bot_msg}"
-                    
+                if "user" in exchange and "bot" in exchange:
+                    user_msg = exchange["user"]["content"]
+                    bot_msg = exchange["bot"]["content"]
+
+                    exchange_text = (
+                        f"ОБМЕН {i+1}:\nПользователь: {user_msg}\nБот: {bot_msg}"
+                    )
+
                     if conv_chars + len(exchange_text) + 4 > conv_limit:
                         break
-                    
+
                     context_parts.append(exchange_text)
                     conv_chars += len(exchange_text) + 4
                     current_chars += len(exchange_text) + 4
-            
-            logger.info(f"Added conversation context: {len(conversation_context)} exchanges, {conv_chars} chars")
-        
+
+            logger.info(
+                f"Added conversation context: {len(conversation_context)} exchanges, {conv_chars} chars"
+            )
+
         # Block 3: RAG Results (remaining space)
         remaining_chars = max_context_chars - current_chars
         if remaining_chars > 500:  # Only add if we have meaningful space
@@ -203,26 +233,28 @@ class LLMService:
             context_parts.append(block3_header)
             current_chars += len(block3_header) + 4
             remaining_chars -= len(block3_header) + 4
-            
+
             # Add top chunks (reserve 60% of remaining space)
             if top_chunks and remaining_chars > 200:
                 chunks_limit = int(remaining_chars * 0.6)
                 chunks_chars = 0
-                
+
                 for i, chunk in enumerate(top_chunks):
-                    payload = chunk.get('payload', {})
-                    content = payload.get('content', '')
-                    page_info = payload.get('page_info', f'Chunk {i+1}')
-                    url = payload.get('url', '')
-                    score = chunk.get('score', 0)
-                    
+                    payload = chunk.get("payload", {})
+                    content = payload.get("content", "")
+                    page_info = payload.get("page_info", f"Chunk {i+1}")
+                    url = payload.get("url", "")
+                    score = chunk.get("score", 0)
+
                     chunk_text = f"ЧАНК {i+1}: {page_info} (Score: {score:.3f})\nURL: {url}\n{content}"
-                    
+
                     if chunks_chars + len(chunk_text) + 4 > chunks_limit:
                         # Try to truncate this chunk
                         available = chunks_limit - chunks_chars - 4
                         if available > 100:
-                            truncated_content = content[:available - 100] + "... [truncated]"
+                            truncated_content = (
+                                content[: available - 100] + "... [truncated]"
+                            )
                             chunk_text = f"ЧАНК {i+1}: {page_info} (Score: {score:.3f})\nURL: {url}\n{truncated_content}"
                             context_parts.append(chunk_text)
                             chunks_chars += len(chunk_text) + 4
@@ -230,25 +262,27 @@ class LLMService:
                     else:
                         context_parts.append(chunk_text)
                         chunks_chars += len(chunk_text) + 4
-                
+
                 current_chars += chunks_chars
                 remaining_chars -= chunks_chars
-            
+
             # Add complete pages (remaining space)
             if complete_pages and remaining_chars > 200:
                 for i, page in enumerate(complete_pages):
-                    payload = page.get('payload', {})
-                    content = payload.get('content', '')
-                    page_info = payload.get('page_info', f'Page {i+1}')
-                    url = payload.get('url', '')
-                    score = page.get('rerank_score', page.get('score', 0))
-                    
+                    payload = page.get("payload", {})
+                    content = payload.get("content", "")
+                    page_info = payload.get("page_info", f"Page {i+1}")
+                    url = payload.get("url", "")
+                    score = page.get("rerank_score", page.get("score", 0))
+
                     page_text = f"СТРАНИЦА {i+1}: {page_info} (Rerank Score: {score:.3f})\nURL: {url}\n{content}"
-                    
+
                     if len(page_text) + 4 > remaining_chars:
                         # Try to truncate this page
                         if remaining_chars > 200:
-                            truncated_content = content[:remaining_chars - 200] + "... [truncated]"
+                            truncated_content = (
+                                content[: remaining_chars - 200] + "... [truncated]"
+                            )
                             page_text = f"СТРАНИЦА {i+1}: {page_info} (Rerank Score: {score:.3f})\nURL: {url}\n{truncated_content}"
                             context_parts.append(page_text)
                             current_chars += len(page_text) + 4
@@ -257,21 +291,23 @@ class LLMService:
                         context_parts.append(page_text)
                         current_chars += len(page_text) + 4
                         remaining_chars -= len(page_text) + 4
-        
-        logger.info(f"Three-phase context assembled: edu_programs + {len(conversation_context)} conversations + {len(top_chunks)} chunks + {len(complete_pages)} pages, {current_chars} chars (limit: {max_context_chars})")
+
+        logger.info(
+            f"Three-phase context assembled: edu_programs + {len(conversation_context)} conversations + {len(top_chunks)} chunks + {len(complete_pages)} pages, {current_chars} chars (limit: {max_context_chars})"
+        )
         return "\n\n".join(context_parts)
-    
+
     def _create_system_prompt(self, language: str) -> str:
         """
         Create system prompt for educational consultant role based on language.
-        
+
         Args:
             language: Response language ('en' or 'ru')
-            
+
         Returns:
             System prompt text for educational consultant
         """
-        if language == 'ru':
+        if language == "ru":
             return """КРИТИЧЕСКИ ВАЖНО: Ты консультант ТОЛЬКО по двум программам ИИ в ИТМО. ЗАПРЕЩЕНО упоминать любые другие программы!
 
 🎯 ТВОЯ ЕДИНСТВЕННАЯ СПЕЦИАЛИЗАЦИЯ:
@@ -377,20 +413,20 @@ COMMUNICATION STYLE:
 - Motivation for studying AI at ITMO
 
 Help choose the optimal AI program at ITMO based on student's background and goals."""
-    
+
     def _create_user_prompt(self, query: str, context: str, language: str) -> str:
         """
         Create user prompt with query and context.
-        
+
         Args:
             query: User's question
             context: Retrieved context from documents
             language: Response language
-            
+
         Returns:
             Formatted user prompt
         """
-        if language == 'ru':
+        if language == "ru":
             return f"""Контекст из сайта:
 {context}
 
@@ -404,15 +440,21 @@ Help choose the optimal AI program at ITMO based on student's background and goa
 User question: {query}
 
 Answer the question using only the information from the provided context."""
-    
+
     @log_performance
-    def generate_answer(self, query: str, documents: List[Dict[str, Any]],
-                       language: str = 'en', max_retries: int = 2,
-                       top_embedder_results: int = 5, top_reranker_results: int = 5,
-                       max_context_chars: int = 20000) -> Optional[str]:
+    def generate_answer(
+        self,
+        query: str,
+        documents: List[Dict[str, Any]],
+        language: str = "en",
+        max_retries: int = 2,
+        top_embedder_results: int = 5,
+        top_reranker_results: int = 5,
+        max_context_chars: int = 20000,
+    ) -> Optional[str]:
         """
         Generate answer based on query and retrieved documents.
-        
+
         Args:
             query: User's question
             documents: List of retrieved and reranked documents
@@ -421,94 +463,108 @@ Answer the question using only the information from the provided context."""
             top_embedder_results: Number of top embedder results to guarantee in context
             top_reranker_results: Number of top reranker results to include
             max_context_chars: Maximum context characters for LLM
-            
+
         Returns:
             Generated answer or None if failed
         """
         if not self._ensure_connection():
             logger.error("Cannot generate answer: no connection to Ollama")
             return None
-        
+
         if not documents:
             logger.warning("No documents provided for answer generation")
             return None
-        
+
         # Create context from documents with smart assembly
-        context = self._create_context_from_documents(documents, top_embedder_results, top_reranker_results, max_context_chars)
+        context = self._create_context_from_documents(
+            documents, top_embedder_results, top_reranker_results, max_context_chars
+        )
         if not context:
             logger.warning("No valid context extracted from documents")
             return None
-        
+
         # Create prompts
         system_prompt = self._create_system_prompt(language)
         user_prompt = self._create_user_prompt(query, context, language)
-        
+
         logger.info(f"Generating answer for query: '{query[:50]}...' in {language}")
-        logger.debug(f"Context length: {len(context)} chars, Documents: {len(documents)}")
-        
+        logger.debug(
+            f"Context length: {len(context)} chars, Documents: {len(documents)}"
+        )
+
         # Log first 500 characters of context for debugging
-        context_preview = context[:500].replace('\n', '\\n')
+        context_preview = context[:500].replace("\n", "\\n")
         logger.debug(f"Context preview (first 500 chars): {context_preview}...")
-        
+
         for attempt in range(max_retries):
             try:
                 start_time = time.time()
-                
+
                 response = self.client.generate(
                     model=self.model,
                     prompt=user_prompt,
                     system=system_prompt,
                     options={
-                        'temperature': 0.3,  # Low temperature for factual responses
-                        'top_p': 0.9,
-                        'num_predict': 8192,  # Allow longer responses
-                    }
+                        "temperature": 0.3,  # Low temperature for factual responses
+                        "top_p": 0.9,
+                        "num_predict": 8192,  # Allow longer responses
+                    },
                 )
-                
+
                 duration = time.time() - start_time
-                answer = response.get('response', '').strip()
-                
+                answer = response.get("response", "").strip()
+
                 if answer:
                     # Log generation metrics
                     log_generation_metrics(answer, len(context), duration, language)
-                    
-                    logger.info(f"Generated answer of {len(answer)} chars in {duration:.2f}s")
+
+                    logger.info(
+                        f"Generated answer of {len(answer)} chars in {duration:.2f}s"
+                    )
                     return answer
                 else:
                     logger.warning(f"Empty response from LLM on attempt {attempt + 1}")
-                    
+
             except Exception as e:
-                duration = time.time() - start_time if 'start_time' in locals() else 0
-                logger.warning(f"Answer generation attempt {attempt + 1} failed after {duration:.2f}s: {e}")
-                
+                duration = time.time() - start_time if "start_time" in locals() else 0
+                logger.warning(
+                    f"Answer generation attempt {attempt + 1} failed after {duration:.2f}s: {e}"
+                )
+
                 if attempt < max_retries - 1:
-                    wait_time = 2 ** attempt  # Exponential backoff
+                    wait_time = 2**attempt  # Exponential backoff
                     logger.info(f"Retrying in {wait_time} seconds...")
                     time.sleep(wait_time)
                 else:
                     log_error_with_context(
                         e,
                         {
-                            'query_length': len(query),
-                            'context_length': len(context),
-                            'documents_count': len(documents),
-                            'language': language,
-                            'attempt': attempt + 1
-                        }
+                            "query_length": len(query),
+                            "context_length": len(context),
+                            "documents_count": len(documents),
+                            "language": language,
+                            "attempt": attempt + 1,
+                        },
                     )
-        
+
         logger.error(f"Failed to generate answer after {max_retries} attempts")
         return None
-    
+
     @log_performance
-    def generate_answer_two_phase(self, query: str, top_chunks: List[Dict[str, Any]],
-                                complete_pages: List[Dict[str, Any]], language: str = 'en',
-                                max_retries: int = 2, max_context_chars: int = 20000,
-                                conversation_context: List[Dict[str, Any]] = None,
-                                educational_programs_data: str = None) -> Optional[str]:
+    def generate_answer_two_phase(
+        self,
+        query: str,
+        top_chunks: List[Dict[str, Any]],
+        complete_pages: List[Dict[str, Any]],
+        language: str = "en",
+        max_retries: int = 2,
+        max_context_chars: int = 20000,
+        conversation_context: List[Dict[str, Any]] = None,
+        educational_programs_data: str = None,
+    ) -> Optional[str]:
         """
         Generate answer using three-phase context assembly with educational programs and conversation context.
-        
+
         Args:
             query: User's question
             top_chunks: Top chunks from vector search
@@ -518,152 +574,166 @@ Answer the question using only the information from the provided context."""
             max_context_chars: Maximum context characters for LLM
             conversation_context: Recent conversation exchanges
             educational_programs_data: Educational programs information
-            
+
         Returns:
             Generated answer or None if failed
         """
         if not self._ensure_connection():
             logger.error("Cannot generate answer: no connection to Ollama")
             return None
-        
+
         # Check if we have any context to work with
         if not top_chunks and not complete_pages and not educational_programs_data:
             logger.warning("No context provided for answer generation")
             return None
-        
+
         # Create three-phase context
         context = self._create_three_phase_context(
             educational_programs_data or "",
             conversation_context or [],
             top_chunks,
             complete_pages,
-            max_context_chars
+            max_context_chars,
         )
-        
+
         if not context:
             logger.warning("No valid context extracted")
             return None
-        
+
         # Create prompts
         system_prompt = self._create_system_prompt(language)
         user_prompt = self._create_user_prompt(query, context, language)
-        
-        logger.info(f"Generating three-phase answer for query: '{query[:50]}...' in {language}")
-        logger.debug(f"Context length: {len(context)} chars, Educational: {bool(educational_programs_data)}, Conversations: {len(conversation_context or [])}, Chunks: {len(top_chunks)}, Pages: {len(complete_pages)}")
-        
+
+        logger.info(
+            f"Generating three-phase answer for query: '{query[:50]}...' in {language}"
+        )
+        logger.debug(
+            f"Context length: {len(context)} chars, Educational: {bool(educational_programs_data)}, Conversations: {len(conversation_context or [])}, Chunks: {len(top_chunks)}, Pages: {len(complete_pages)}"
+        )
+
         # Log first 500 characters of context for debugging
-        context_preview = context[:500].replace('\n', '\\n')
-        logger.debug(f"Three-phase context preview (first 500 chars): {context_preview}...")
-        
+        context_preview = context[:500].replace("\n", "\\n")
+        logger.debug(
+            f"Three-phase context preview (first 500 chars): {context_preview}..."
+        )
+
         for attempt in range(max_retries):
             try:
                 start_time = time.time()
-                
+
                 response = self.client.generate(
                     model=self.model,
                     prompt=user_prompt,
                     system=system_prompt,
                     options={
-                        'temperature': 0.3,  # Low temperature for factual responses
-                        'top_p': 0.9,
-                        'num_predict': 8192,  # Allow longer responses
-                    }
+                        "temperature": 0.3,  # Low temperature for factual responses
+                        "top_p": 0.9,
+                        "num_predict": 8192,  # Allow longer responses
+                    },
                 )
-                
+
                 duration = time.time() - start_time
-                answer = response.get('response', '').strip()
-                
+                answer = response.get("response", "").strip()
+
                 if answer:
                     # Log generation metrics
                     log_generation_metrics(answer, len(context), duration, language)
-                    
-                    logger.info(f"Generated three-phase answer of {len(answer)} chars in {duration:.2f}s")
+
+                    logger.info(
+                        f"Generated three-phase answer of {len(answer)} chars in {duration:.2f}s"
+                    )
                     return answer
                 else:
                     logger.warning(f"Empty response from LLM on attempt {attempt + 1}")
-                    
+
             except Exception as e:
-                duration = time.time() - start_time if 'start_time' in locals() else 0
-                logger.warning(f"Three-phase answer generation attempt {attempt + 1} failed after {duration:.2f}s: {e}")
-                
+                duration = time.time() - start_time if "start_time" in locals() else 0
+                logger.warning(
+                    f"Three-phase answer generation attempt {attempt + 1} failed after {duration:.2f}s: {e}"
+                )
+
                 if attempt < max_retries - 1:
-                    wait_time = 2 ** attempt  # Exponential backoff
+                    wait_time = 2**attempt  # Exponential backoff
                     logger.info(f"Retrying in {wait_time} seconds...")
                     time.sleep(wait_time)
                 else:
                     log_error_with_context(
                         e,
                         {
-                            'query_length': len(query),
-                            'context_length': len(context),
-                            'educational_programs': bool(educational_programs_data),
-                            'conversation_exchanges': len(conversation_context or []),
-                            'chunks_count': len(top_chunks),
-                            'pages_count': len(complete_pages),
-                            'language': language,
-                            'attempt': attempt + 1
-                        }
+                            "query_length": len(query),
+                            "context_length": len(context),
+                            "educational_programs": bool(educational_programs_data),
+                            "conversation_exchanges": len(conversation_context or []),
+                            "chunks_count": len(top_chunks),
+                            "pages_count": len(complete_pages),
+                            "language": language,
+                            "attempt": attempt + 1,
+                        },
                     )
-        
-        logger.error(f"Failed to generate three-phase answer after {max_retries} attempts")
+
+        logger.error(
+            f"Failed to generate three-phase answer after {max_retries} attempts"
+        )
         return None
-    
-    def generate_fallback_response(self, language: str = 'en') -> str:
+
+    def generate_fallback_response(self, language: str = "en") -> str:
         """
         Generate fallback response when no relevant content is found.
-        
+
         Args:
             language: Response language
-            
+
         Returns:
             Fallback response text
         """
-        if language == 'ru':
-            return ("Извините, я не смог найти релевантную информацию для ответа на ваш вопрос. "
-                   "Я специализируюсь исключительно на консультировании по двум магистерским программам ИТМО:\n\n"
-                   "🤖 **'Искусственный интеллект'** - техническая разработка и исследования ИИ\n"
-                   "📊 **'Управление ИИ-продуктами'** - бизнес и управление продуктами ИИ\n\n"
-                   "Расскажите о своих интересах в области ИИ, и я помогу выбрать подходящую программу!")
+        if language == "ru":
+            return (
+                "Извините, я не смог найти релевантную информацию для ответа на ваш вопрос. "
+                "Я специализируюсь исключительно на консультировании по двум магистерским программам ИТМО:\n\n"
+                "🤖 **'Искусственный интеллект'** - техническая разработка и исследования ИИ\n"
+                "📊 **'Управление ИИ-продуктами'** - бизнес и управление продуктами ИИ\n\n"
+                "Расскажите о своих интересах в области ИИ, и я помогу выбрать подходящую программу!"
+            )
         else:
-            return ("I couldn't find relevant information to answer your question. "
-                   "I specialize exclusively in consulting on two ITMO master's programs:\n\n"
-                   "🤖 **'Artificial Intelligence'** - technical AI development and research\n"
-                   "📊 **'AI Product Management'** - business and AI product management\n\n"
-                   "Tell me about your interests in AI, and I'll help you choose the right program!")
-    
+            return (
+                "I couldn't find relevant information to answer your question. "
+                "I specialize exclusively in consulting on two ITMO master's programs:\n\n"
+                "🤖 **'Artificial Intelligence'** - technical AI development and research\n"
+                "📊 **'AI Product Management'** - business and AI product management\n\n"
+                "Tell me about your interests in AI, and I'll help you choose the right program!"
+            )
+
     def health_check(self) -> bool:
         """
         Check if the LLM service is healthy.
-        
+
         Returns:
             True if service is healthy, False otherwise
         """
         try:
             if not self._ensure_connection():
                 return False
-            
+
             # Test with a simple generation
             test_response = self.client.generate(
-                model=self.model,
-                prompt="Test prompt",
-                options={'num_predict': 10}
+                model=self.model, prompt="Test prompt", options={"num_predict": 10}
             )
-            
-            return bool(test_response.get('response'))
-            
+
+            return bool(test_response.get("response"))
+
         except Exception as e:
             logger.error(f"LLM health check failed: {e}")
             return False
-    
+
     def get_model_info(self) -> dict:
         """
         Get information about the current LLM model.
-        
+
         Returns:
             Dictionary with model information
         """
         return {
-            'model': self.model,
-            'host': f"{OLLAMA_HOST}:{OLLAMA_PORT}",
-            'healthy': self.health_check()
+            "model": self.model,
+            "host": f"{OLLAMA_HOST}:{OLLAMA_PORT}",
+            "healthy": self.health_check(),
         }
