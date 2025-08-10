@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    container_name: qdrant_service
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+      - QDRANT__SERVICE__HTTP_PORT=6333
+    network_mode: host
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_service
+    volumes:
+      - ./ollama_data:/root/.ollama
+    network_mode: host
+
+  split-md:
+    build: .
+    container_name: split_md_service
+    command: python split_md.py
+    volumes:
+      - ./pages:/app/pages
+      - .:/app/data
+    network_mode: host
+    restart: no
+
+  embedder:
+    build: .
+    container_name: embedder_service
+    depends_on:
+      - qdrant
+    command: python embedder.py
+    volumes:
+      - ./pages:/app/pages
+      - ./embeddings:/app/embeddings
+    environment:
+      - QDRANT_HOST=localhost
+      - QDRANT_PORT=6333
+      - OLLAMA_HOST=host.orb.internal
+      - OLLAMA_PORT=11434
+    network_mode: host
+    restart: no

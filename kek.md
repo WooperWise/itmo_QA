@@ -1,0 +1,1 @@
+Можно можно бы использовать https://github.com/Vdmrl/agent-itmo , но это неспортивно.

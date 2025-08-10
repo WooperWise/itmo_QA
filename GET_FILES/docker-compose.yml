@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  pdf-downloader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pdf_downloader
+    environment:
+      - SCRAPER_URL=https://abit.itmo.ru/program/master/ai
+    volumes:
+      - ./output:/app/output
+    stdin_open: true
+    tty: true
+    restart: no
+    privileged: true

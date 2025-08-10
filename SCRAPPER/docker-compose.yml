@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Direct Scraper Service (uses local Crawl4AI installation)
+  scraper-direct:
+    build:
+      context: .
+      dockerfile: Dockerfile.scraper_direct
+    container_name: zabanaddux_scraper_direct
+    environment:
+      - CRAWL4AI_HOST=
+      - SCRAPER_URL=https://abit.itmo.ru/program/master/ai_product
+      - SCRAPER_DEPTH=1
+      - SCRAPER_MAX_PAGES=500
+    volumes:
+      - .:/app
+      - crawl4ai_data:/root/.cache/ms-playwright
+    stdin_open: true
+    tty: true
+    restart: no
+    privileged: true
+
+volumes:
+  crawl4ai_data:

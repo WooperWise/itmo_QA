@@ -1,0 +1,795 @@
+2025-08-09 15:37:41,518 - utils.language_utils - DEBUG - Language detection: 0/14 Cyrillic chars, ratio: 0.00
+2025-08-09 15:37:41,519 - utils.language_utils - INFO - Detected English input, will respond in English
+2025-08-09 15:37:41,519 - utils.language_utils - DEBUG - Language detection: 13/13 Cyrillic chars, ratio: 1.00
+2025-08-09 15:37:41,519 - utils.language_utils - INFO - Detected Russian input, will respond in Russian
+2025-08-09 15:37:41,519 - utils.language_utils - DEBUG - Language detection: 0/18 Cyrillic chars, ratio: 0.00
+2025-08-09 15:37:41,519 - utils.language_utils - INFO - Detected English input, will respond in English
+2025-08-09 15:37:41,519 - utils.language_utils - DEBUG - Language detection: 20/20 Cyrillic chars, ratio: 1.00
+2025-08-09 15:37:41,519 - utils.language_utils - INFO - Detected Russian input, will respond in Russian
+2025-08-09 15:37:41,519 - utils.language_utils - DEBUG - Language detection: 8/24 Cyrillic chars, ratio: 0.33
+2025-08-09 15:37:41,519 - utils.language_utils - INFO - Detected Russian input, will respond in Russian
+2025-08-09 15:37:41,519 - utils.message_utils - DEBUG - Formatted 2 sources for language: en
+2025-08-09 15:37:41,519 - utils.message_utils - INFO - Split message of 4800 chars into 2 parts
+2025-08-09 15:37:41,519 - utils.message_utils - INFO - Prepared 2 messages with sources
+2025-08-09 15:37:41,547 - services.embedding_service - INFO - Connected to Ollama at http://host.orb.internal:11434
+2025-08-09 15:37:41,581 - services.reranker_service - INFO - Connected to Ollama reranker at http://host.orb.internal:11434
+2025-08-09 15:37:41,608 - services.llm_service - INFO - Connected to Ollama LLM at http://host.orb.internal:11434
+2025-08-09 15:37:41,636 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 15:37:41,657 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 15:37:41,657 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 15:37:41,685 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 15:37:41,687 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 15:37:41,687 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 15:37:41,687 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:41,688 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c78c10>
+2025-08-09 15:37:41,688 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:41,688 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:41,688 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:41,688 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:41,688 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:42,442 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:42 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 15:37:42,444 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 15:37:42,444 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:42,445 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:42,445 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:42,445 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:42,447 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 4 in 0.76s
+2025-08-09 15:37:42,447 - services.embedding_service - INFO - generate_embedding completed in 0.76s
+2025-08-09 15:37:42,448 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:42,452 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c7acb0>
+2025-08-09 15:37:42,452 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:42,452 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:42,452 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:42,453 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:42,453 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:43,299 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:43 GMT'), (b'Content-Length', b'664')])
+2025-08-09 15:37:43,300 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:43,301 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:43,301 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:43,301 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:43,301 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:43,305 - services.reranker_service - WARNING - Could not extract score from response: '#&/'#."/&,'
+2025-08-09 15:37:43,306 - services.reranker_service - WARNING - All reranking attempts failed, returning neutral score
+2025-08-09 15:37:43,307 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:43,310 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c7a3e0>
+2025-08-09 15:37:43,310 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:43,311 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:43,312 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:43,312 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:43,312 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,467 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:45 GMT'), (b'Content-Length', b'430')])
+2025-08-09 15:37:45,468 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:45,468 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,469 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:45,469 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:45,469 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:45,470 - services.rag_service - INFO - RAG health check: {'qdrant': False, 'embedding': True, 'reranker': True, 'llm': True, 'overall': False}
+2025-08-09 15:37:45,534 - services.embedding_service - INFO - Connected to Ollama at http://host.orb.internal:11434
+2025-08-09 15:37:45,567 - services.reranker_service - INFO - Connected to Ollama reranker at http://host.orb.internal:11434
+2025-08-09 15:37:45,594 - services.llm_service - INFO - Connected to Ollama LLM at http://host.orb.internal:11434
+2025-08-09 15:37:45,621 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 15:37:45,624 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 15:37:45,624 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 15:37:45,652 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 15:37:45,654 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 15:37:45,654 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 15:37:45,655 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:45,656 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c69a80>
+2025-08-09 15:37:45,656 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,656 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:45,656 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,656 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:45,656 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,772 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:45 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 15:37:45,772 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 15:37:45,772 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,772 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:45,772 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:45,772 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:45,773 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 4 in 0.12s
+2025-08-09 15:37:45,773 - services.embedding_service - INFO - generate_embedding completed in 0.12s
+2025-08-09 15:37:45,773 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:45,774 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c68d90>
+2025-08-09 15:37:45,775 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,775 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:45,775 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,775 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:45,775 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,930 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:45 GMT'), (b'Content-Length', b'659')])
+2025-08-09 15:37:45,932 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:45,933 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,933 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:45,933 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:45,933 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:45,934 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 15:37:45,938 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff93c69d20>
+2025-08-09 15:37:45,938 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:45,939 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:45,939 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:45,939 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:45,940 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,197 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:46 GMT'), (b'Content-Length', b'426')])
+2025-08-09 15:37:46,198 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:46,198 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,198 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:46,198 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:46,198 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:46,255 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 15:37:46,257 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 15:37:46,257 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 15:37:46,258 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,258 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:46,258 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,258 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:46,258 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,297 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:46 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 15:37:46,298 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 15:37:46,298 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,298 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:46,298 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:46,298 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:46,298 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 4 in 0.04s
+2025-08-09 15:37:46,298 - services.embedding_service - INFO - generate_embedding completed in 0.04s
+2025-08-09 15:37:46,298 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,299 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:46,299 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,299 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:46,299 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,408 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:46 GMT'), (b'Content-Length', b'654')])
+2025-08-09 15:37:46,410 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:46,410 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,410 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:46,410 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:46,411 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:46,412 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,412 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 15:37:46,412 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,412 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 15:37:46,413 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 15:37:46,670 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 12:37:46 GMT'), (b'Content-Length', b'426')])
+2025-08-09 15:37:46,671 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 15:37:46,671 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 15:37:46,672 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 15:37:46,672 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 15:37:46,672 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 15:37:46,672 - services.rag_service - INFO - RAG health check: {'qdrant': False, 'embedding': True, 'reranker': True, 'llm': True, 'overall': False}
+2025-08-09 20:15:21,304 - __main__ - INFO - Initializing RAG service...
+2025-08-09 20:15:21,333 - services.embedding_service - INFO - Connected to Ollama at http://host.orb.internal:11434
+2025-08-09 20:15:21,362 - services.reranker_service - INFO - Connected to Ollama reranker at http://host.orb.internal:11434
+2025-08-09 20:15:21,391 - services.llm_service - INFO - Connected to Ollama LLM at http://host.orb.internal:11434
+2025-08-09 20:15:21,422 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 20:15:21,425 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 20:15:21,425 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 20:15:21,425 - __main__ - INFO - Testing with query: 'топологическая сортировка'
+2025-08-09 20:15:21,426 - services.rag_service - INFO - Processing question: 'топологическая сортировка...' in ru
+2025-08-09 20:15:21,426 - services.rag_service - DEBUG - Step 1: Generating query embedding
+2025-08-09 20:15:21,426 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 20:15:21,427 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff80218ac0>
+2025-08-09 20:15:21,427 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:15:21,427 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:15:21,427 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:15:21,427 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:15:21,427 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:15:21,919 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:15:21 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:15:21,920 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 20:15:21,920 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:15:21,921 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:15:21,921 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:15:21,921 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:15:21,922 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 25 in 0.50s
+2025-08-09 20:15:21,922 - services.embedding_service - INFO - generate_embedding completed in 0.50s
+2025-08-09 20:15:21,922 - services.rag_service - DEBUG - Step 2: Performing vector search
+2025-08-09 20:15:21,978 - httpcore.connection - DEBUG - connect_tcp.started host='qdrant' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 20:15:21,981 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(gaierror(-2, 'Name or service not known'))
+2025-08-09 20:15:21,981 - services.rag_service - ERROR - Failed to connect to Qdrant: [Errno -2] Name or service not known
+2025-08-09 20:15:21,982 - services.rag_service - ERROR - Cannot perform vector search: no Qdrant connection
+2025-08-09 20:15:21,982 - services.rag_service - INFO - vector_search completed in 0.06s
+2025-08-09 20:15:21,982 - services.rag_service - WARNING - No results from vector search
+2025-08-09 20:15:21,982 - services.rag_service - INFO - answer_question completed in 0.56s
+2025-08-09 20:15:21,982 - __main__ - ERROR - Failed to generate answer
+2025-08-09 20:19:43,312 - __main__ - INFO - Initializing RAG service...
+2025-08-09 20:19:43,342 - services.embedding_service - INFO - Connected to Ollama at http://host.orb.internal:11434
+2025-08-09 20:19:43,373 - services.reranker_service - INFO - Connected to Ollama reranker at http://host.orb.internal:11434
+2025-08-09 20:19:43,407 - services.llm_service - INFO - Connected to Ollama LLM at http://host.orb.internal:11434
+2025-08-09 20:19:43,437 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 20:19:43,439 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff8b8db2b0>
+2025-08-09 20:19:43,439 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-08-09 20:19:43,439 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:43,439 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-08-09 20:19:43,439 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:43,439 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-08-09 20:19:43,443 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'content-encoding', b'br'), (b'content-type', b'application/json'), (b'date', b'Sat, 09 Aug 2025 17:19:42 GMT')])
+2025-08-09 20:19:43,443 - httpx - INFO - HTTP Request: GET http://host.orb.internal:6333/collections "HTTP/1.1 200 OK"
+2025-08-09 20:19:43,443 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-08-09 20:19:43,443 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:43,444 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:43,444 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:43,444 - services.rag_service - INFO - Connected to Qdrant at host.orb.internal:6333
+2025-08-09 20:19:43,444 - services.rag_service - INFO - Available collections: ['markdown_pages']
+2025-08-09 20:19:43,444 - __main__ - INFO - Testing with query: 'топологическая сортировка'
+2025-08-09 20:19:43,444 - services.rag_service - INFO - Processing question: 'топологическая сортировка...' in ru
+2025-08-09 20:19:43,444 - services.rag_service - DEBUG - Step 1: Generating query embedding
+2025-08-09 20:19:43,445 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 20:19:43,445 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff8b8dada0>
+2025-08-09 20:19:43,445 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:43,445 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:43,445 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:43,446 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:43,446 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:43,528 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:43 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:43,528 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 20:19:43,528 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:43,528 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:43,528 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:43,528 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:43,529 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 25 in 0.08s
+2025-08-09 20:19:43,529 - services.embedding_service - INFO - generate_embedding completed in 0.08s
+2025-08-09 20:19:43,529 - services.rag_service - DEBUG - Step 2: Performing vector search
+2025-08-09 20:19:43,529 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:43,529 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:43,529 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:43,529 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:43,529 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:43,543 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'content-encoding', b'br'), (b'content-type', b'application/json'), (b'date', b'Sat, 09 Aug 2025 17:19:43 GMT')])
+2025-08-09 20:19:43,543 - httpx - INFO - HTTP Request: POST http://host.orb.internal:6333/collections/markdown_pages/points/search "HTTP/1.1 200 OK"
+2025-08-09 20:19:43,543 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:43,550 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:43,550 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:43,550 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:43,553 - services.rag_service - INFO - Vector search completed: 50 results in 0.02s
+2025-08-09 20:19:43,553 - services.rag_service - INFO - vector_search completed in 0.02s
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector search: 50 results for query 'топологическая сортировка...', scores: max=0.849, min=0.542, avg=0.574
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - === ALL 50 VECTOR SEARCH RESULTS ===
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #1: score=0.849, Page 134, http://e-maxx.ru/algo/topological_sort
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #2: score=0.660, Page 133, http://e-maxx.ru/algo/strong_connected_components
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #3: score=0.612, Page 139, http://e-maxx.ru/algo/ternary_search
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #4: score=0.597, Page 65, http://e-maxx.ru/algo/floyd_warshall_algorithm
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #5: score=0.596, Page 104, http://e-maxx.ru/algo/nearest_points
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #6: score=0.595, Page 133, http://e-maxx.ru/algo/strong_connected_components
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #7: score=0.590, Page 104, http://e-maxx.ru/algo/nearest_points
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #8: score=0.588, Page 72, http://e-maxx.ru/algo/intersecting_segments
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #9: score=0.585, Page 46, http://e-maxx.ru/algo/facets
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #10: score=0.584, Page 104, http://e-maxx.ru/algo/nearest_points
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #11: score=0.580, Page 134, http://e-maxx.ru/algo/topological_sort
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #12: score=0.580, Page 104, http://e-maxx.ru/algo/nearest_points
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #13: score=0.579, Page 138, http://e-maxx.ru/algo/suffix_array
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #14: score=0.578, Page 80, http://e-maxx.ru/algo/kth_order_statistics
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #15: score=0.576, Page 43, http://e-maxx.ru/algo/dsu
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #16: score=0.575, Page 46, http://e-maxx.ru/algo/facets
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #17: score=0.574, Page 58, http://e-maxx.ru/algo/generating_combinations
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #18: score=0.574, Page 134, http://e-maxx.ru/algo/topological_sort
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #19: score=0.573, Page 134, http://e-maxx.ru/algo/topological_sort
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #20: score=0.573, Page 133, http://e-maxx.ru/algo/strong_connected_components
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #21: score=0.573, Page 39, http://e-maxx.ru/algo/dijkstra_sparse
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #22: score=0.570, Page 11, http://e-maxx.ru/algo/catalan_numbers
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #23: score=0.569, Page 142, http://e-maxx.ru/algo/assignment_hungary
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #24: score=0.569, Page 31, http://e-maxx.ru/algo/cutpoints
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #25: score=0.566, Page 38, http://e-maxx.ru/algo/dinic
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #26: score=0.565, Page 134, http://e-maxx.ru/algo/topological_sort
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #27: score=0.564, Page 103, http://e-maxx.ru/algo/negative_cycle
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #28: score=0.562, Page 28, http://e-maxx.ru/algo/convex_hull_graham
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #29: score=0.561, Page 6, http://e-maxx.ru/algo/bridge_searching_online
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #30: score=0.561, Page 26, http://e-maxx.ru/algo/connected_components
+2025-08-09 20:19:43,553 - utils.logging_utils - INFO - Vector #31: score=0.560, Page 135, http://e-maxx.ru/algo/treap
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #32: score=0.558, Page 83, http://e-maxx.ru/algo/kuhn_matching
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #33: score=0.558, Page 132, http://e-maxx.ru/algo/stoer_wagner_mincut
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #34: score=0.557, Page 150, http://e-maxx.ru
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #35: score=0.557, Page 43, http://e-maxx.ru/algo/dsu
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #36: score=0.556, Page 100, http://e-maxx.ru/algo/mst_kruskal
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #37: score=0.556, Page 83, http://e-maxx.ru/algo/kuhn_matching
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #38: score=0.555, Page 142, http://e-maxx.ru/algo/voronoi_diagram_2d_n4
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #39: score=0.555, Page 43, http://e-maxx.ru/algo/dsu
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #40: score=0.554, Page 10, http://e-maxx.ru/algo/assignment_hungary
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #41: score=0.552, Page 69, http://e-maxx.ru/algo/johnson_problem_1
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #42: score=0.551, Page 104, http://e-maxx.ru/algo/nearest_points
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #43: score=0.547, Page 108, http://e-maxx.ru/algo/pt_in_polygon
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #44: score=0.547, Page 29, http://e-maxx.ru/algo/counting_connected_graphs
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #45: score=0.545, Page 33, http://e-maxx.ru/algo/dfs
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #46: score=0.545, Page 43, http://e-maxx.ru/algo/dsu
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #47: score=0.543, Page 32, http://e-maxx.ru/algo/covering_segments
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #48: score=0.542, Page 2, http://e-maxx.ru/algo
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #49: score=0.542, Page 132, http://e-maxx.ru/algo/stoer_wagner_mincut
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Vector #50: score=0.542, Page 10, http://e-maxx.ru/algo/assignment_hungary
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - === END VECTOR SEARCH RESULTS ===
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO - Grouped into 32 pages:
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/topological_sort: 5 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/strong_connected_components: 3 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/ternary_search: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/floyd_warshall_algorithm: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/nearest_points: 5 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/intersecting_segments: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/facets: 2 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/suffix_array: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/kth_order_statistics: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/dsu: 4 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/generating_combinations: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/dijkstra_sparse: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/catalan_numbers: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/assignment_hungary: 3 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/cutpoints: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/dinic: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/negative_cycle: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/convex_hull_graham: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/bridge_searching_online: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   http://e-maxx.ru/algo/connected_components: 1 chunks
+2025-08-09 20:19:43,554 - utils.logging_utils - INFO -   ... and 12 more pages
+2025-08-09 20:19:43,554 - services.rag_service - DEBUG - Step 3: Grouping chunks by page
+2025-08-09 20:19:43,554 - services.rag_service - INFO - Grouped 50 chunks into 32 pages
+2025-08-09 20:19:43,554 - services.rag_service - DEBUG - Step 4: Reranking page groups
+2025-08-09 20:19:43,554 - services.reranker_service - INFO - Reranking 32 pages for query: 'топологическая сортировка...'
+2025-08-09 20:19:43,554 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 20:19:43,555 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff8b921720>
+2025-08-09 20:19:43,555 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:43,555 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:43,556 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:43,556 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:43,556 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:44,293 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:44 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:44,294 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:44,295 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:44,295 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:44,295 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:44,295 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:44,297 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/topological_sort: reranker score = 1.00 (from 5 chunks)
+2025-08-09 20:19:44,298 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:44,299 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:44,299 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:44,300 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:44,301 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:44,876 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:44 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:44,877 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:44,877 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:44,878 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:44,878 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:44,879 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:44,879 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/strong_connected_components: reranker score = 4.00 (from 3 chunks)
+2025-08-09 20:19:44,881 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:44,881 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:44,882 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:44,882 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:44,882 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:45,096 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:45 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:45,097 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:45,097 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:45,097 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:45,097 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:45,097 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:45,098 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/ternary_search: reranker score = 2.00 (from 1 chunks)
+2025-08-09 20:19:45,098 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:45,099 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:45,099 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:45,099 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:45,099 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:45,316 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:45 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:45,317 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:45,318 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:45,319 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:45,319 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:45,320 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:45,320 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/floyd_warshall_algorithm: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:45,322 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:45,322 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:45,323 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:45,323 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:45,324 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,101 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:46 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:46,102 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:46,102 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,103 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:46,103 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:46,103 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:46,104 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/nearest_points: reranker score = 3.00 (from 5 chunks)
+2025-08-09 20:19:46,105 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,106 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:46,106 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,106 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:46,106 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,316 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:46 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:46,316 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:46,316 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,317 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:46,317 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:46,317 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:46,317 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/intersecting_segments: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:46,318 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,318 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:46,318 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,318 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:46,318 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,651 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:46 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:46,652 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:46,652 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,653 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:46,653 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:46,653 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:46,654 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/facets: reranker score = 3.10 (from 2 chunks)
+2025-08-09 20:19:46,655 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,656 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:46,656 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,657 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:46,657 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,874 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:46 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:46,875 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:46,876 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,876 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:46,876 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:46,876 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:46,877 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/suffix_array: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:46,878 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:46,879 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:46,879 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:46,880 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:46,880 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,088 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:47 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:47,089 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:47,089 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,089 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:47,089 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:47,089 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:47,090 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/kth_order_statistics: reranker score = 2.00 (from 1 chunks)
+2025-08-09 20:19:47,091 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,091 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:47,091 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,092 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:47,092 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,651 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:47 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:47,651 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:47,652 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,652 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:47,652 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:47,652 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:47,653 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/dsu: reranker score = 2.00 (from 4 chunks)
+2025-08-09 20:19:47,654 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,654 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:47,655 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,655 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:47,655 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,865 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:47 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:47,866 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:47,866 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,866 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:47,866 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:47,866 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:47,867 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/generating_combinations: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:47,868 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:47,869 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:47,869 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:47,869 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:47,869 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,078 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:48 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:48,079 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:48,079 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,079 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:48,080 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:48,080 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:48,080 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/dijkstra_sparse: reranker score = 4.00 (from 1 chunks)
+2025-08-09 20:19:48,082 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,083 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:48,083 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,084 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:48,084 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,326 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:48 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:48,327 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:48,327 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,327 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:48,327 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:48,327 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:48,328 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/catalan_numbers: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:48,329 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,329 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:48,329 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,330 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:48,330 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,801 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:48 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:48,802 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:48,803 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,803 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:48,804 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:48,804 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:48,805 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/assignment_hungary: reranker score = 3.00 (from 3 chunks)
+2025-08-09 20:19:48,806 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:48,806 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:48,806 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:48,806 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:48,807 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,027 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:49,027 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:49,028 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,028 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:49,028 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:49,028 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:49,028 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/cutpoints: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:49,029 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,029 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:49,029 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,030 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:49,030 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,240 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:49,240 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:49,240 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,240 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:49,240 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:49,240 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:49,241 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/dinic: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:49,241 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,241 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:49,241 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,241 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:49,241 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,451 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:49,453 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:49,453 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,454 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:49,454 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:49,454 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:49,454 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/negative_cycle: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:49,456 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,457 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:49,457 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,458 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:49,458 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,678 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:49,679 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:49,680 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,680 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:49,681 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:49,681 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:49,681 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/convex_hull_graham: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:49,683 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,683 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:49,684 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,684 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:49,684 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,902 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:49,903 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:49,903 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,904 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:49,904 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:49,904 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:49,904 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/bridge_searching_online: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:49,905 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:49,905 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:49,906 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:49,906 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:49,906 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,104 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:50 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:50,105 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:50,105 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,105 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:50,106 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:50,106 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:50,106 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/connected_components: reranker score = 2.00 (from 1 chunks)
+2025-08-09 20:19:50,107 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,107 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:50,108 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,108 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:50,108 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,301 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:50 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:50,302 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:50,302 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,302 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:50,303 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:50,303 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:50,303 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/treap: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:50,305 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,306 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:50,306 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,307 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:50,307 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,638 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:50 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:50,639 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:50,640 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,640 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:50,640 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:50,641 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:50,643 - services.reranker_service - WARNING - Could not extract score from response: '--%$/.+'"-'
+2025-08-09 20:19:50,644 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,645 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:50,646 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,646 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:50,647 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,762 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:50 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:50,763 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:50,763 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,764 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:50,764 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:50,764 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:50,765 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/kuhn_matching: reranker score = 3.00 (from 2 chunks)
+2025-08-09 20:19:50,766 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:50,767 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:50,767 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:50,767 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:50,768 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,168 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:51,169 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:51,170 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,170 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:51,170 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:51,170 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:51,171 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/stoer_wagner_mincut: reranker score = 10.00 (from 2 chunks)
+2025-08-09 20:19:51,172 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,172 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:51,172 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,172 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:51,172 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,410 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:51,411 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:51,411 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,412 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:51,412 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:51,412 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:51,413 - services.reranker_service - DEBUG - Page http://e-maxx.ru: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:51,414 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,415 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:51,415 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,416 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:51,416 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,642 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:51,643 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:51,643 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,643 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:51,644 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:51,644 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:51,645 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/mst_kruskal: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:51,646 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,647 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:51,647 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,647 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:51,648 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,874 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:51,876 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:51,876 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,877 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:51,877 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:51,877 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:51,877 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/voronoi_diagram_2d_n4: reranker score = 3.00 (from 1 chunks)
+2025-08-09 20:19:51,878 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:51,878 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:51,878 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:51,879 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:51,879 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,118 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:52 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:52,119 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:52,119 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,119 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:52,119 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:52,120 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:52,120 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/johnson_problem_1: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:52,121 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,122 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:52,122 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,122 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:52,123 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,329 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:52 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:52,330 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:52,330 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,330 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:52,330 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:52,330 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:52,331 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/pt_in_polygon: reranker score = 2.00 (from 1 chunks)
+2025-08-09 20:19:52,331 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,332 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:52,332 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,333 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:52,333 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,543 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:52 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:52,544 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:52,544 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,544 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:52,544 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:52,544 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:52,545 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/counting_connected_graphs: reranker score = 2.00 (from 1 chunks)
+2025-08-09 20:19:52,545 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,546 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:52,546 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,546 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:52,546 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,764 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:52 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:52,764 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:52,765 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,765 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:52,765 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:52,765 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:52,765 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/dfs: reranker score = 1.00 (from 1 chunks)
+2025-08-09 20:19:52,766 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,766 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:52,766 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,767 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:52,767 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,963 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:52 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:52,964 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:52,964 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,964 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:52,965 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:52,965 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:52,965 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo/covering_segments: reranker score = 10.00 (from 1 chunks)
+2025-08-09 20:19:52,966 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:52,966 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:52,967 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:52,967 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:52,967 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:53,185 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 17:19:53 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 20:19:53,185 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/generate "HTTP/1.1 200 OK"
+2025-08-09 20:19:53,185 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 20:19:53,185 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 20:19:53,185 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 20:19:53,185 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 20:19:53,185 - services.reranker_service - DEBUG - Page http://e-maxx.ru/algo: reranker score = 4.00 (from 1 chunks)
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranker: selected 10 from 32 pages in 9.63s for query 'топологическая сортировка...'
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - === PAGE-LEVEL RERANKER RESULTS ===
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #1: rerank_score=10.000 (orig=0.579), original_pos=13, 1 chunks, Page 138, http://e-maxx.ru/algo/suffix_array
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #2: rerank_score=10.000 (orig=0.569), original_pos=24, 1 chunks, Page 31, http://e-maxx.ru/algo/cutpoints
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #3: rerank_score=10.000 (orig=0.562), original_pos=28, 1 chunks, Page 28, http://e-maxx.ru/algo/convex_hull_graham
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #4: rerank_score=10.000 (orig=0.561), original_pos=29, 1 chunks, Page 6, http://e-maxx.ru/algo/bridge_searching_online
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #5: rerank_score=10.000 (orig=0.558), original_pos=33, 2 chunks, Page 132, http://e-maxx.ru/algo/stoer_wagner_mincut
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #6: rerank_score=10.000 (orig=0.556), original_pos=36, 1 chunks, Page 100, http://e-maxx.ru/algo/mst_kruskal
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #7: rerank_score=10.000 (orig=0.552), original_pos=41, 1 chunks, Page 69, http://e-maxx.ru/algo/johnson_problem_1
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #8: rerank_score=10.000 (orig=0.543), original_pos=47, 1 chunks, Page 32, http://e-maxx.ru/algo/covering_segments
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #9: rerank_score=4.000 (orig=0.660), original_pos=2, 3 chunks, Page 133, http://e-maxx.ru/algo/strong_connected_components
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - Reranked #10: rerank_score=4.000 (orig=0.573), original_pos=21, 1 chunks, Page 39, http://e-maxx.ru/algo/dijkstra_sparse
+2025-08-09 20:19:53,185 - utils.logging_utils - INFO - === END RERANKER RESULTS ===
+2025-08-09 20:19:53,185 - services.reranker_service - INFO - Reranking completed: selected 10 documents in 9.63s
+2025-08-09 20:19:53,185 - services.reranker_service - INFO - rerank_documents completed in 9.63s
+2025-08-09 20:19:53,186 - services.rag_service - DEBUG - Step 5: Generating answer with smart context assembly
+2025-08-09 20:19:53,186 - services.llm_service - INFO - Context assembled: 10 documents, 9916 chars (limit: 20000)
+2025-08-09 20:19:53,186 - services.llm_service - INFO - Generating answer for query: 'топологическая сортировка...' in ru
+2025-08-09 20:19:53,186 - services.llm_service - DEBUG - Context length: 9952 chars, Documents: 10
+2025-08-09 20:19:53,186 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 20:19:53,187 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff8b959870>
+2025-08-09 20:19:53,187 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 20:19:53,187 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 20:19:53,187 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 20:19:53,187 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 20:19:53,188 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 21:20:50,385 - __main__ - INFO - Initializing RAG service...
+2025-08-09 21:20:50,414 - services.embedding_service - INFO - Connected to Ollama at http://host.orb.internal:11434
+2025-08-09 21:20:50,466 - services.reranker_service - INFO - Connected to Ollama reranker at http://host.orb.internal:11434
+2025-08-09 21:20:50,504 - services.llm_service - INFO - Connected to Ollama LLM at http://host.orb.internal:11434
+2025-08-09 21:20:50,532 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=6333 local_address=None timeout=5.0 socket_options=None
+2025-08-09 21:20:50,535 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff9b385c00>
+2025-08-09 21:20:50,535 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-08-09 21:20:50,535 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 21:20:50,535 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-08-09 21:20:50,535 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 21:20:50,535 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-08-09 21:20:50,542 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'content-type', b'application/json'), (b'content-encoding', b'br'), (b'date', b'Sat, 09 Aug 2025 18:20:50 GMT')])
+2025-08-09 21:20:50,542 - httpx - INFO - HTTP Request: GET http://host.orb.internal:6333/collections "HTTP/1.1 200 OK"
+2025-08-09 21:20:50,542 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-08-09 21:20:50,542 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 21:20:50,542 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 21:20:50,542 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 21:20:50,543 - services.rag_service - INFO - Connected to Qdrant at host.orb.internal:6333
+2025-08-09 21:20:50,543 - services.rag_service - INFO - Available collections: ['markdown_pages']
+2025-08-09 21:20:50,543 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-08-09 21:20:50,543 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 21:20:50,543 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-08-09 21:20:50,543 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 21:20:50,543 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-08-09 21:20:50,544 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'content-type', b'application/json'), (b'content-encoding', b'br'), (b'date', b'Sat, 09 Aug 2025 18:20:50 GMT')])
+2025-08-09 21:20:50,544 - httpx - INFO - HTTP Request: GET http://host.orb.internal:6333/collections "HTTP/1.1 200 OK"
+2025-08-09 21:20:50,544 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-08-09 21:20:50,544 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 21:20:50,544 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 21:20:50,544 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 21:20:50,545 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 21:20:50,545 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff9b352ef0>
+2025-08-09 21:20:50,545 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 21:20:50,545 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 21:20:50,545 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 21:20:50,545 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 21:20:50,545 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-08-09 21:20:51,025 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sat, 09 Aug 2025 18:20:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-08-09 21:20:51,026 - httpx - INFO - HTTP Request: POST http://host.orb.internal:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-08-09 21:20:51,027 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-08-09 21:20:51,027 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-08-09 21:20:51,027 - httpcore.http11 - DEBUG - response_closed.started
+2025-08-09 21:20:51,027 - httpcore.http11 - DEBUG - response_closed.complete
+2025-08-09 21:20:51,029 - services.embedding_service - DEBUG - Generated embedding of size 1024 for text length 4 in 0.48s
+2025-08-09 21:20:51,029 - services.embedding_service - INFO - generate_embedding completed in 0.48s
+2025-08-09 21:20:51,030 - httpcore.connection - DEBUG - connect_tcp.started host='host.orb.internal' port=11434 local_address=None timeout=None socket_options=None
+2025-08-09 21:20:51,031 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0xffff9b353b80>
+2025-08-09 21:20:51,031 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-08-09 21:20:51,032 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-08-09 21:20:51,032 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-08-09 21:20:51,032 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-08-09 21:20:51,032 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>

@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: telegram_bot_service
+    command: sh -c "python init_db.py && python bot.py"
+    volumes:
+      - ./pages:/app/pages
+      - bot_data:/app/data
+    environment:
+      # Telegram Configuration
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      
+      # Qdrant Configuration
+      - QDRANT_HOST=localhost
+      - QDRANT_PORT=6333
+      - QDRANT_COLLECTION_NAME=markdown_pages
+      
+      # Ollama Configuration
+      - OLLAMA_HOST=host.orb.internal
+      - OLLAMA_PORT=11434
+      - OLLAMA_EMBEDDING_MODEL=dengcao/Qwen3-Embedding-0.6B:Q8_0
+      - OLLAMA_RERANKER_MODEL=dengcao/Qwen3-Reranker-4B:Q4_K_M
+      - OLLAMA_GENERATION_MODEL=qwen3:4b
+      
+      # Bot Configuration
+      - VECTOR_SEARCH_LIMIT=50
+      - RERANKER_LIMIT=10
+      - MAX_MESSAGE_LENGTH=4000
+      - TOP_EMBEDDER_RESULTS=5
+      - TOP_RERANKER_RESULTS=5
+      - MAX_CONTEXT_CHARS=20000
+      
+      # Database Configuration
+      - DATABASE_PATH=/app/data/conversations.db
+      
+      # Logging Configuration
+      - LOG_LEVEL=INFO
+    network_mode: host
+    depends_on:
+      - wait-for-services
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "from services.conversation_service import ConversationService; cs = ConversationService('/app/data/conversations.db'); exit(0 if cs.health_check() else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Service to wait for dependencies to be ready
+  wait-for-services:
+    image: busybox:latest
+    container_name: wait_for_services
+    command: >
+      sh -c "
+        echo 'Waiting for Qdrant to be ready...';
+        until nc -z localhost 6333; do
+          echo 'Qdrant not ready, waiting...';
+          sleep 5;
+        done;
+        echo 'Qdrant is ready!';
+        
+        echo 'Waiting for Ollama to be ready...';
+        until nc -z host.orb.internal 11434; do
+          echo 'Ollama not ready, waiting...';
+          sleep 5;
+        done;
+        echo 'Ollama is ready!';
+        
+        echo 'All services are ready!';
+      "
+    network_mode: host
+    restart: "no"
+
+volumes:
+  bot_data:
+    driver: local
